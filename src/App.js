@@ -7,7 +7,7 @@ function App() {
     "강남 우동맛집",
     "파이썬독학",
   ]);
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
 
   return (
@@ -15,7 +15,7 @@ function App() {
       <div className="black-nav">
         <h4>ReactBlog</h4>
       </div>
-      <button
+      {/* <button
         onClick={() => {
           let list = [...글제목];
           list.sort();
@@ -62,7 +62,29 @@ function App() {
           {글제목[2]}
         </h4>
         <p>4월 12일 발행</p>
-      </div>
+      </div> */}
+
+      {글제목.map(function (a, i) {
+        return (
+          <div className="list">
+            <h4>
+              {글제목[i]}
+              <span
+                onClick={() => {
+                  let copy = [...count];
+                  copy[i] += 1;
+                  setCount(copy);
+                }}
+              >
+                👍
+              </span>
+              {count[i]}
+            </h4>
+            <p>4월 12일 발행</p>
+          </div>
+        );
+      })}
+
       {modal == true ? <Modal /> : null}
     </div>
   );
