@@ -1,4 +1,3 @@
-import A from "./A";
 import "./App.css";
 import { useState } from "react";
 
@@ -9,6 +8,7 @@ function App() {
     "파이썬독학",
   ]);
   let [count, setCount] = useState(0);
+  let [modal, setModal] = useState(false);
 
   return (
     <div className="App">
@@ -52,10 +52,18 @@ function App() {
         <p>4월 12일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4
+          onClick={() => {
+            // 방법 1: modal == true ? setModal(false) : setModal(true);
+            // 방법 2: setModal((modal) => { return !modal;});
+            setModal(!modal);
+          }}
+        >
+          {글제목[2]}
+        </h4>
         <p>4월 12일 발행</p>
       </div>
-      <Modal />
+      {modal == true ? <Modal /> : null}
     </div>
   );
 }
