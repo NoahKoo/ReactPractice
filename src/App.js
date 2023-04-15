@@ -10,6 +10,7 @@ function App() {
   let [count, setCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [detail, setDetail] = useState(0);
+  let [inputValue, setInputValue] = useState("");
 
   return (
     <div className="App">
@@ -64,7 +65,6 @@ function App() {
         </h4>
         <p>4월 12일 발행</p>
       </div> */}
-
       {글제목.map(function (a, i) {
         return (
           <div className="list" key={i}>
@@ -87,9 +87,41 @@ function App() {
               {count[i]}
             </h4>
             <p>4월 12일 발행</p>
+            <button
+              onClick={() => {
+                let copy = [...글제목];
+                copy.splice(i, 1);
+                글제목변경(copy);
+              }}
+            >
+              삭제
+            </button>
           </div>
         );
       })}
+
+      <input
+        value={inputValue}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+      />
+      <button
+        type="submit"
+        onClick={() => {
+          if (!inputValue) return;
+          let copy = [...글제목];
+          copy.unshift(inputValue);
+          글제목변경(copy);
+          setInputValue("");
+
+          let copyCount = [...count];
+          copyCount.unshift(0);
+          setCount(copyCount);
+        }}
+      >
+        입력
+      </button>
 
       {modal == true ? (
         <Modal
