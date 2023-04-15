@@ -1,5 +1,6 @@
+import { render } from "@testing-library/react";
 import "./App.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 function App() {
   let [글제목, 글제목변경] = useState([
@@ -131,6 +132,7 @@ function App() {
           detail={detail}
         />
       ) : null}
+      <Modal2></Modal2>
     </div>
   );
 }
@@ -144,6 +146,30 @@ function Modal(props) {
       <button>글수정</button>
     </div>
   );
+}
+
+class Modal2 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "kim",
+      age: 20,
+    };
+  }
+  render() {
+    return (
+      <div>
+        안녕{this.state.age}
+        <button
+          onClick={() => {
+            this.setState({ age: 21 });
+          }}
+        >
+          버튼
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
