@@ -9,6 +9,7 @@ function App() {
   ]);
   let [count, setCount] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [detail, setDetail] = useState(0);
 
   return (
     <div className="App">
@@ -70,6 +71,7 @@ function App() {
             <h4
               onClick={() => {
                 setModal(!modal);
+                setDetail(i);
               }}
             >
               {글제목[i]}
@@ -90,7 +92,12 @@ function App() {
       })}
 
       {modal == true ? (
-        <Modal 글제목변경={글제목변경} title={글제목} color="skyblue" />
+        <Modal
+          글제목변경={글제목변경}
+          title={글제목}
+          color="skyblue"
+          detail={detail}
+        />
       ) : null}
     </div>
   );
@@ -99,18 +106,10 @@ function App() {
 function Modal(props) {
   return (
     <div className="modal" style={{ background: props.color }}>
-      <h4>{props.title[0]}</h4>
+      <h4>{props.title[props.detail]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
-      <button
-        onClick={() => {
-          let list = [...props.title];
-          list[0] = "여자 코트 추천";
-          props.글제목변경(list);
-        }}
-      >
-        글수정
-      </button>
+      <button>글수정</button>
     </div>
   );
 }
